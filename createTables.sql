@@ -1,3 +1,4 @@
+
 Create table users
 (
 uid integer,
@@ -12,14 +13,8 @@ constraint uIC1 primary key(uid)
 Create table conversation
 (
   cid integer not null,
-  constraint cIC1 primary key(conversationID)
+  constraint cIC1 primary key(cid)
 );
-
-/*
-message(timeSent, userID, ConversationID, messageType, contents)
-TakesPartIn( userID, ConversationID)
-Friendship(userID, userID)
-*/
 
 Create table message --this is a weak entity
 (
@@ -28,11 +23,30 @@ Create table message --this is a weak entity
   mcid integer not null, --part of key - message conversation id
   txt text not null --contents of the message - contains text and cannot send a null message
   --create constraints - weak entity defined by timesent, user.uid, conversation.cid
-)
+  constraint messagePKey primary key (timeSent),
+  constraint messageForeignKey1 foreign key(muid) references user(uid),
+  constraint messageForeignKey2 foreign key(mcid) references conversation(mcid)
+);
 
-Create table media
+Create table media  --can only send one media per message
 (
+  timeSent time not null, --foreign key
+  muid integer not null, --foreign key
+  mcid integer not null, --foreign key
   fileType varchar(4),
-  fileName varchar(260)
-  --can only send one media per message
-)
+  fileName varchar(260),
+
+  --Constraints:
+  constraint mediaFkey foreign key(muid, mcid, timeSent) references message(muid, mcid, timeSent)
+);
+
+Create table takesPartIn
+(
+  uid integer not null,
+  cid integer not null,
+
+--foreign keys from user and conversation
+  constraint userForeignKey foreign key(uid) references users(uid),
+  constraint convForeignKey foreign key(cid) references conversation(cid)
+);
+
