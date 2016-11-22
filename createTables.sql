@@ -21,7 +21,7 @@ Create table message --this is a weak entity
   timeSent time not null, --part of key
   muid integer not null, --message user id - part of key
   mcid integer not null, --part of key - message conversation id
-  txt text not null --contents of the message - contains text and cannot send a null message
+  txt text not null, --contents of the message - contains text and cannot send a null message
   --create constraints - weak entity defined by timesent, user.uid, conversation.cid
   constraint messagePKey primary key (timeSent),
   constraint messageForeignKey1 foreign key(muid) references user(uid),
