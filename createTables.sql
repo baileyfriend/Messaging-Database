@@ -18,7 +18,7 @@ Create table conversation
 
 Create table message --this is a weak entity
 (
-  messageKey VARCHAR(200) PRIMARY KEY,  -- must have some kind of independent key - @TODO figure out how to create a key based on other values (concat them or maybe hash together foreign keys with timestamp to create a key for the table). Need this for media
+  messageKey VARCHAR(200) PRIMARY KEY,  -- must have some kind of independent key
   timeSent TIMESTAMP, --not part of key, does not need to be unique
   muid INTEGER NOT NULL, --message user id - part of key
   mcid INTEGER NOT NULL, --part of key - message conversation id
@@ -27,7 +27,8 @@ Create table message --this is a weak entity
   --constraint messagePKey primary key(timeSent),
   constraint messageFKeyUser foreign key(muid) references users(userID) ON DELETE SET NULL,
   constraint messageFKeyConversation foreign key(mcid) references conversation(cid) ON DELETE SET NULL
-); --@TODO create a hashed key to identify the message by combining the foreign keys
+  --@TODO create constraint that user must be part of conversation to be able to send messages to the conversation
+);
 
 Create table media  --can only send one media per message
 (
@@ -46,8 +47,8 @@ Create table takesPartIn
 --foreign keys from user and conversation
   constraint userForeignKey foreign key(userID) references users(userID),
   constraint convForeignKey foreign key(cid) references conversation(cid)
---@TODO create constraint that user must be part of conversation to be able to send messages to the conversation
 );
 
 
---@TODO create the isFriendsWith table!!!! Must be friends with someone to start a conversation with them (create constraint in conversation to reflect this)
+--@TODO create the isFriendsWith table! Must be friends with someone to start a conversation with them (create constraint in conversation to reflect this)
+--@TODO create avatar profile pic table - has a 1:1 relationship with user - this table contains a list of available profile pictures - user can only pick from this list - no uploading their own pic -
