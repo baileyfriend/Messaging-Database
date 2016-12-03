@@ -30,4 +30,7 @@ SELECT * FROM conversation;
 SELECT * FROM message;
 SELECT * FROM media;
 SELECT * FROM takesPartIn;
+SELECT * FROM isFriendsWith;
+SELECT * FROM avatar;
+SELECT * FROM iptable;
 SET ECHO OFF

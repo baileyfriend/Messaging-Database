@@ -34,6 +34,6 @@ INSERT INTO avatar VALUES ('sillyMale.jpg', 1000);
 INSERT INTO avatar VALUES ('battlestargalactica.jpg', 1020);
 
 --Insert into ipaddresses
-INSERT INTO ipaddresses VALUES ('10.0.1.1', 1000);
-INSERT INTO ipaddresses VALUES ('10.0.1.2', 1000);
-INSERT INTO ipaddresses VALUES ('98.24.96.12', 1010);
+INSERT INTO iptable VALUES ('10.0.1.1', 1000);
+INSERT INTO iptable VALUES ('10.0.1.2', 1000);
+INSERT INTO iptable VALUES ('98.24.96.12', 1010);
