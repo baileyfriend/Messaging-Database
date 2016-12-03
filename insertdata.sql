@@ -22,6 +22,18 @@ INSERT INTO media VALUES (2, 'congrats', '.gif');
 
 
 --Insert into takesPartIn
---@TODO figure out how to generate insertion into the takesPartIn convo whenever a new conversation is created - maybe create a constraint in message that a user must be a part of the conversation to send a message to it
 INSERT INTO takesPartIn VALUES (1000, 100);
 INSERT INTO takesPartIn VALUES (1010, 100);
+
+--Insert into isFriendsWith
+INSERT INTO isFriendsWith VALUES (1000, 1010);
+INSERT INTO isFriendsWith VALUES (1010, 1000);
+
+--Insert into avatar
+INSERT INTO avatar VALUES ('sillyMale.jpg', 1000);
+INSERT INTO avatar VALUES ('battlestargalactica.jpg', 1020);
+
+--Insert into ipaddresses
+INSERT INTO ipaddresses VALUES ('10.0.1.1', 1000);
+INSERT INTO ipaddresses VALUES ('10.0.1.2', 1000);
+INSERT INTO ipaddresses VALUES ('98.24.96.12', 1010);

@@ -49,6 +49,27 @@ Create table takesPartIn
   constraint convForeignKey foreign key(cid) references conversation(cid)
 );
 
+Create Table isFriendsWith
+(
+  userID INTEGER not null,
+  friendID INTEGER,
+--both combine to make the key
+  CONSTRAINT friendsUserFKey foreign key(userID) references users(userID),
+  CONSTRAINT friendsFKey foreign key(friendID) references users(userID)
+);
+--@TODO create avatar profile pic table -  -
 
---@TODO create the isFriendsWith table! Must be friends with someone to start a conversation with them (create constraint in conversation to reflect this)
---@TODO create avatar profile pic table - has a 1:1 relationship with user - this table contains a list of available profile pictures - user can only pick from this list - no uploading their own pic -
+Create Table avatar --has a 1:1 relationship with user - this table contains a list of available profile pictures - user can only pick from this list - no uploading their own pic
+( --every avatar can only have 1 user assigned to it - no avatar repeats.
+  --a user may or may not have an avatar
+  avatarFileName VARCHAR(260) PRIMARY KEY,
+  userID INTEGER
+);
+
+Create Table iptable
+(--The ip address is the key, and users is an attribute.
+  --This means that one user can have multiple ip adresses,
+  --but each ip address only has one user.
+  ipaddress VARCHAR(15) PRIMARY KEY, --In format nnn.nnn.nnn.nnn
+  userID INTEGER
+);
