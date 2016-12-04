@@ -1,9 +1,14 @@
 -- Insert into users
-INSERT INTO users VALUES (1000, 21, 'freundb@gmail.com', 'Bailey', 'Freund');
-INSERT INTO users VALUES (1010, 18, 'someguy@gmail.com', 'Fred', 'Digglesbee');
-INSERT INTO users VALUES (1020, 39, 'bbbattlestargalactica@gmail.com', 'Dwight', 'Schrute');
-INSERT INTO users VALUES (1030, 40, 'westfield@architect.com', 'Ted', 'Mosby');
-INSERT INTO users VALUES (1040, 16, 'peter@gmail.com', 'Peter', 'Ventimiglia');
+INSERT INTO users VALUES (1000, 21, userEmail('freundb@gmail.com', 'freundb2@yahoo.com'), 'Bailey', 'Freund');
+INSERT INTO users VALUES (1010, 18, userEmail('someguy@gmail.com', 'mrfred@charter.net'), 'Fred', 'Digglesbee');
+INSERT INTO users VALUES (1020, 39, userEmail('bbbattlestargalactica@gmail.com', 'dwight@schrutefarms.com'), 'Dwight', 'Schrute');
+INSERT INTO users VALUES (1030, 40, userEmail('westfield@architect.com'), 'Ted', 'Mosby');
+INSERT INTO users VALUES (1040, 16, userEmail('peter@gmail.com', 'spam@spammer.edu', 'thisperson@pizza.com'), 'Peter', 'Ventimiglia');
+
+--Insert into email_table
+INSERT INTO email_table VALUES (1000, VARRAY('schoolemail@school.edu'));
+INSERT INTO email_table VALUES (1000, 'schoolemail@school.edu');
+
 
 
 --Insert into conversation
