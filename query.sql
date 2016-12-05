@@ -65,3 +65,23 @@ WHERE u.userID = tpi.userID
 GROUP BY u.userID
 ORDER BY COUNT(u.userID) DESC;
 
+--This one does the same as the one above but using a NON CORRELATED subquery -- NON CORRELATED
+SELECT userID, COUNT(userID) AS Num_of_conversations, 
+	RANK () OVER (ORDER BY COUNT(userID) DESC) AS Rank
+FROM (SELECT u.userID, tpi.cid
+FROM users u, takespartin tpi
+WHERE u.userID = tpi.userID)
+GROUP BY userID
+ORDER BY COUNT(userID) DESC;
+
+--finds all users who are not a part of a conversation. -- CORRELATED subquery
+SELECT u.userID
+FROM users u
+WHERE NOT EXISTS (SELECT * FROM takesPartIn tpi WHERE u.userID = tpi.userID);
+
+--finds all users who are a part of a conversation. -- CORRELATED subquery
+SELECT u.userID
+FROM users u
+WHERE EXISTS (SELECT * FROM takesPartIn tpi WHERE u.userID = tpi.userID);
+
+
