@@ -26,3 +26,42 @@ where u.userID = i.userID;
 select u.FNAME, a.avatarFileName
 from users u, avatar a
 where u.userID = a.userID;
+
+--Find all pairs of users that are connected by conversations -- Self-join -- GROUP BY, HAVING, ORDER BY
+SELECT u1.userID, u2.userID
+FROM users u1, users u2, takesPartIn tp1, takesPartIn tp2
+WHERE u1.userID != u2.userID AND
+		u1.userID = tp1.userID AND
+		u2.userID = tp2.userID AND
+		tp1.cid = tp2.cid
+GROUP BY u1.userID, u2.userID
+HAVING u1.userID < u2.userID
+ORDER BY u1.userID;
+
+--number of total users in conversations.
+SELECT Count(userID)
+FROM takesPartIn;
+
+--All users that take part in conversations, and which conversation they are apart of. 
+SELECT u.userID, tpi.cid
+FROM users u, takespartin tpi
+WHERE u.userID = tpi.userID;
+
+--All user that take part in a conversation -- INTERSECT
+SELECT userID FROM users
+INTERSECT
+SELECT userID FROM takespartin
+
+--Very basic just ranks all users by there userID -- RANK
+SELECT userID, RANK () OVER (ORDER BY userID) AS Rank
+FROM users;
+
+--More advanced version of the rank query above
+--This one Ranks users by how many conversations they are apart of. -- RANK
+SELECT u.userID, COUNT(u.userID) AS Num_of_conversations, 
+	RANK () OVER (ORDER BY COUNT(u.userID) DESC) AS Rank
+FROM users u, takespartin tpi
+WHERE u.userID = tpi.userID
+GROUP BY u.userID
+ORDER BY COUNT(u.userID) DESC;
+
