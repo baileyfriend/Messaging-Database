@@ -1,0 +1,55 @@
+SQL> SET ECHO ON
+SQL> @dropTables.sql
+SQL> DROP TABLE avatar CASCADE CONSTRAINTS;
+
+Table dropped.
+
+SQL> DROP TABLE isFriendsWith CASCADE CONSTRAINTS;
+
+Table dropped.
+
+SQL> DROP TABLE iptable CASCADE CONSTRAINTS;
+
+Table dropped.
+
+SQL> DROP TABLE takesPartIn CASCADE CONSTRAINTS;
+
+Table dropped.
+
+SQL> DROP TABLE media CASCADE CONSTRAINTS;
+
+Table dropped.
+
+SQL> DROP TABLE message CASCADE CONSTRAINTS;
+
+Table dropped.
+
+SQL> DROP TABLE conversation CASCADE CONSTRAINTS;
+
+Table dropped.
+
+SQL> DROP TABLE users CASCADE CONSTRAINTS;
+
+Table dropped.
+
+SQL> /*
+SQL> CIS 353 - Database Design Project
+SQL> Bailey Freund
+SQL> Madison Brooks
+SQL> Timothy Devries
+SQL> Zach Myers
+SQL> */
+SQL>
+SQL> --In the DDL, every IC must have a unique name; e.g. IC5, IC10, IC15, etc.
+SQL> CREATE TYPE userEmail as TABLE OF VARCHAR(254);
+  2  /
+CREATE TYPE userEmail as TABLE OF VARCHAR(254);
+            *
+ERROR at line 1:
+ORA-00955: name is already used by an existing object
+
+
+SQL>
+SQL> CREATE TABLE users(
+  2  userID INTEGER NOT NULL, --for some reason uid breaks sqlplus
+  3  age INTEGER NOT NULL, --  user must be above 12
