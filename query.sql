@@ -84,4 +84,35 @@ SELECT u.userID
 FROM users u
 WHERE EXISTS (SELECT * FROM takesPartIn tpi WHERE u.userID = tpi.userID);
 
+--shows the min, max, total, and average age of each conversation
+SELECT TPI.cid, MIN(U.age) as Minimum Age, MAX(U.age) as Maximum Age, SUM(U.age) as Total Age, AVERAGE(U.age) as Average Age
+FROM users U, takespartin TPI
+WHERE U.userID = TPI.userID
+GROUP BY TPI.cid;
 
+--shows the user who has sent the most messages
+SELECT userID, Messages_Sent
+FROM (SELECT U.userID, COUNT(M.messageKey) as Messages_Sent
+      FROM users U, message M
+      WHERE U.userID = M.muid
+      GROUP BY U.userID
+      ORDER BY Messages_Sent)
+WHERE ROWNUM <= 1;
+
+-- shows every user who participates in every conversation Bailey participates in -- DIVISION query
+SELECT U.userID, U.lname, U.fname
+FROM users U
+WHERE NOT EXISTS ((SELECT TPI.cid
+                   FROM takespartin TPI, users U2
+                   WHERE TPI.userID = U2.userID AND
+                         U2.fname = 'Bailey')
+                  MINUS
+                  (SELECT TPI.cid
+                   FROM takespartin TPI
+                   WHERE TPI.userID = U.userID));
+
+-- shows each users conversations -- OUTER JOIN query
+SELECT U.userID, U.lname, TPI.cid
+FROM users U LEFT OUTER JOIN takespartin TPI ON U.userID=TPI.userID;
+
+--

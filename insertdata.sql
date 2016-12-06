@@ -20,7 +20,8 @@ INSERT INTO conversation VALUES (130);
 --Insert into message
 INSERT INTO message VALUES (1, TO_DATE('2016-NOV-25 17:30','YYYY-MON-DD HH24:MI','NLS_DATE_LANGUAGE=AMERICAN'), 1000, 100, 'Hello world :)');
 INSERT INTO message VALUES (2, TO_DATE('2016-NOV-25 17:34','YYYY-MON-DD HH24:MI','NLS_DATE_LANGUAGE=AMERICAN'), 1010, 100, 'It works!!');
-
+INSERT INTO message VALUES (3, TO_DATE('2016-NOV-25 17:37','YYYY-MON-DD HH24:MI','NLS_DATE_LANGUAGE=AMERICAN'), 1030, 100, 'Guys, this is awesome!');
+INSERT INTO message VALUES (4, TO_DATE('2016-NOV-25 17:41','YYYY-MON-DD HH24:MI','NLS_DATE_LANGUAGE=AMERICAN'), 1000, 100, 'Thanks!');
 
 --Insert into media
 INSERT INTO media VALUES (2, 'congrats', '.gif');
@@ -29,6 +30,7 @@ INSERT INTO media VALUES (2, 'congrats', '.gif');
 --Insert into takesPartIn
 INSERT INTO takesPartIn VALUES (1000, 100);
 INSERT INTO takesPartIn VALUES (1010, 100);
+INSERT INTO takesPartIn VALUES (1030, 100);
 
 --Insert into isFriendsWith
 INSERT INTO isFriendsWith VALUES (1000, 1010);
